@@ -22,7 +22,18 @@
  * @file
  * common internal and external API header
  */
+#ifndef INT64_C
+#define INT64_C(c) (c ## LL)
+#define UINT64_C(c) (c ## ULL)
+#endif
 
+#ifdef __cplusplus
+#define __STDC_CONSTANT_MACROS
+#ifdef _STDINT_H
+#undef _STDINT_H
+#endif
+# include <stdint.h>
+#endif
 #ifndef AVUTIL_COMMON_H
 #define AVUTIL_COMMON_H
 
