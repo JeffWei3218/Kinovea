@@ -75,6 +75,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinovea.Camera.Baumer", "Ki
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinovea.Camera.GenICam", "Kinovea.Camera.GenICam\Kinovea.Camera.GenICam.csproj", "{8EB42BF8-6F1F-45D9-A993-4CD9B5168D10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinovea.Camera.IDSpeak", "Kinovea.Camera.IDSpeak\Kinovea.Camera.IDSpeak.csproj", "{26E3EF72-D807-4D35-90B7-93701F35128F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -331,6 +333,18 @@ Global
 		{8EB42BF8-6F1F-45D9-A993-4CD9B5168D10}.DebugExternals|x86.ActiveCfg = Debug|x64
 		{8EB42BF8-6F1F-45D9-A993-4CD9B5168D10}.Release|x64.ActiveCfg = Release|x64
 		{8EB42BF8-6F1F-45D9-A993-4CD9B5168D10}.Release|x86.ActiveCfg = Release|x64
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.Debug|x64.ActiveCfg = Debug|x64
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.Debug|x64.Build.0 = Debug|x64
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.Debug|x86.ActiveCfg = Debug|x86
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.Debug|x86.Build.0 = Debug|x86
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.DebugExternals|x64.ActiveCfg = Debug|x64
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.DebugExternals|x64.Build.0 = Debug|x64
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.DebugExternals|x86.ActiveCfg = Debug|x86
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.DebugExternals|x86.Build.0 = Debug|x86
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.Release|x64.ActiveCfg = Release|x64
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.Release|x64.Build.0 = Release|x64
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.Release|x86.ActiveCfg = Release|x86
+		{26E3EF72-D807-4D35-90B7-93701F35128F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -352,6 +366,7 @@ Global
 		{92CFEB6D-11FB-48BB-A5F9-E2BFB6F8B29F} = {58D505DA-544D-4DCD-B3DB-6562E446E6C4}
 		{0AAB56AE-86C4-45B0-974A-885EFFB4904F} = {58D505DA-544D-4DCD-B3DB-6562E446E6C4}
 		{8EB42BF8-6F1F-45D9-A993-4CD9B5168D10} = {58D505DA-544D-4DCD-B3DB-6562E446E6C4}
+		{26E3EF72-D807-4D35-90B7-93701F35128F} = {58D505DA-544D-4DCD-B3DB-6562E446E6C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D785C0EB-022A-45B5-AF9E-BB711582DB19}

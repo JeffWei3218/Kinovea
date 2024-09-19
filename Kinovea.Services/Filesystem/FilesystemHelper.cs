@@ -393,6 +393,11 @@ namespace Kinovea.Services
             return "INI|*.ini";
         }
 
+        public static string OpenCSETFilter()
+        {
+            return "CSET|*.cset";
+        }
+
         /// <summary>
         /// Show the folder selection dialog and return the selected path.
         /// </summary>

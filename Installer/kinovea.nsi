@@ -9,7 +9,7 @@
     Name "Kinovea"
     SetCompressor /SOLID lzma
 
-    !define VERSION "2024.1.0"
+    !define VERSION "2024.9.1"
     !define EXTRADIR "OtherFiles"
     !define LOCALIZATIONDIR "..\Localization\WorkingDirectory\"
 

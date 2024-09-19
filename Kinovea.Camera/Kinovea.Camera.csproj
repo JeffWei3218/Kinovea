@@ -124,6 +124,12 @@
     <Compile Include="Configuration\CameraPropertyType.cs" />
     <Compile Include="CameraSummary.cs" />
     <Compile Include="CameraTypeManager.cs" />
+    <Compile Include="Configuration\CameraPropertyViewFloatSlider.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Configuration\CameraPropertyViewFloatSlider.Designer.cs">
+      <DependentUpon>CameraPropertyViewFloatSlider.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configuration\CameraPropertyViewLinear.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </Compile>
     <Compile Include="Configuration\CameraPropertyViewCheckbox.Designer.cs">
       <DependentUpon>CameraPropertyViewCheckbox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\FloatTrackBar.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Events\CameraThumbnailProducedEventArgs.cs" />
     <Compile Include="Events\CameraLoadAskedEventArgs.cs" />
@@ -178,6 +187,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Configuration\CameraPropertyViewFloatSlider.resx">
+      <DependentUpon>CameraPropertyViewFloatSlider.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\CameraPropertyViewLinear.resx">
       <DependentUpon>CameraPropertyViewLinear.cs</DependentUpon>
     </EmbeddedResource>

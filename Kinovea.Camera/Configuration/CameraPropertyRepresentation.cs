@@ -11,6 +11,7 @@ namespace Kinovea.Camera
         LinearSlider, 
         LogarithmicSlider,
         Checkbox,
-        EditBox
+        EditBox,
+        FloatSlider
     }
 }

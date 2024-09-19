@@ -178,6 +178,15 @@ namespace Kinovea.Camera.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gamma.
+        /// </summary>
+        public static string FormConfiguration_Properties_Gamma {
+            get {
+                return ResourceManager.GetString("FormConfiguration_Properties_Gamma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Height:.
         /// </summary>
         public static string FormConfiguration_Properties_ImageHeight {
