@@ -50,7 +50,7 @@ namespace Kinovea.Services
             RightVideoFile = file + "-2";
 
             ImageFormat = KinoveaImageFormat.JPG;
-            VideoFormat = KinoveaVideoFormat.MP4;
+            VideoFormat = KinoveaVideoFormat.AVI;
             UncompressedVideoFormat = KinoveaUncompressedVideoFormat.MKV;
         }
 

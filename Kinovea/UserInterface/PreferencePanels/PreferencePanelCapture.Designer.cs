@@ -1,6 +1,6 @@
 #region License
 /*
-Copyright © Joan Charmant 2011.
+Copyright ?Joan Charmant 2011.
 jcharmant@gmail.com 
  
 This file is part of Kinovea.
@@ -118,12 +118,12 @@ namespace Kinovea.Root
       this.lblLeftVideoRoot = new System.Windows.Forms.Label();
       this.tbLeftVideoRoot = new System.Windows.Forms.TextBox();
       this.tabAutomation = new System.Windows.Forms.TabPage();
-      this.cmbTriggerAction = new System.Windows.Forms.ComboBox();
-      this.lblTriggerAction = new System.Windows.Forms.Label();
       this.label1 = new System.Windows.Forms.Label();
       this.nudRecordingTime = new System.Windows.Forms.NumericUpDown();
       this.chkIgnoreOverwriteWarning = new System.Windows.Forms.CheckBox();
       this.gbAudioTrigger = new System.Windows.Forms.GroupBox();
+      this.cmbTriggerAction = new System.Windows.Forms.ComboBox();
+      this.lblTriggerAction = new System.Windows.Forms.Label();
       this.nudQuietPeriod = new System.Windows.Forms.NumericUpDown();
       this.nudAudioTriggerThreshold = new System.Windows.Forms.NumericUpDown();
       this.lblQuietPeriod = new System.Windows.Forms.Label();
@@ -379,6 +379,11 @@ namespace Kinovea.Root
       // nudReplacementFramerate
       // 
       this.nudReplacementFramerate.Location = new System.Drawing.Point(281, 57);
+      this.nudReplacementFramerate.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
       this.nudReplacementFramerate.Minimum = new decimal(new int[] {
             1,
             0,
@@ -388,7 +393,7 @@ namespace Kinovea.Root
       this.nudReplacementFramerate.Size = new System.Drawing.Size(45, 20);
       this.nudReplacementFramerate.TabIndex = 56;
       this.nudReplacementFramerate.Value = new decimal(new int[] {
-            30,
+            230,
             0,
             0,
             0});
@@ -412,7 +417,7 @@ namespace Kinovea.Root
             0,
             0});
       this.nudReplacementThreshold.Minimum = new decimal(new int[] {
-            60,
+            30,
             0,
             0,
             0});
@@ -420,7 +425,7 @@ namespace Kinovea.Root
       this.nudReplacementThreshold.Size = new System.Drawing.Size(45, 20);
       this.nudReplacementThreshold.TabIndex = 54;
       this.nudReplacementThreshold.Value = new decimal(new int[] {
-            150,
+            230,
             0,
             0,
             0});
@@ -1028,25 +1033,6 @@ namespace Kinovea.Root
       this.tabAutomation.Text = "Automation";
       this.tabAutomation.UseVisualStyleBackColor = true;
       // 
-      // cmbTriggerAction
-      // 
-      this.cmbTriggerAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.cmbTriggerAction.FormattingEnabled = true;
-      this.cmbTriggerAction.Location = new System.Drawing.Point(194, 100);
-      this.cmbTriggerAction.Name = "cmbTriggerAction";
-      this.cmbTriggerAction.Size = new System.Drawing.Size(254, 21);
-      this.cmbTriggerAction.TabIndex = 60;
-      this.cmbTriggerAction.SelectedIndexChanged += new System.EventHandler(this.cmbTriggerAction_SelectedIndexChanged);
-      // 
-      // lblTriggerAction
-      // 
-      this.lblTriggerAction.AutoSize = true;
-      this.lblTriggerAction.Location = new System.Drawing.Point(37, 103);
-      this.lblTriggerAction.Name = "lblTriggerAction";
-      this.lblTriggerAction.Size = new System.Drawing.Size(75, 13);
-      this.lblTriggerAction.TabIndex = 58;
-      this.lblTriggerAction.Text = "Trigger action:";
-      // 
       // label1
       // 
       this.label1.AutoSize = true;
@@ -1101,6 +1087,25 @@ namespace Kinovea.Root
       this.gbAudioTrigger.Size = new System.Drawing.Size(455, 162);
       this.gbAudioTrigger.TabIndex = 55;
       this.gbAudioTrigger.TabStop = false;
+      // 
+      // cmbTriggerAction
+      // 
+      this.cmbTriggerAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cmbTriggerAction.FormattingEnabled = true;
+      this.cmbTriggerAction.Location = new System.Drawing.Point(194, 100);
+      this.cmbTriggerAction.Name = "cmbTriggerAction";
+      this.cmbTriggerAction.Size = new System.Drawing.Size(254, 21);
+      this.cmbTriggerAction.TabIndex = 60;
+      this.cmbTriggerAction.SelectedIndexChanged += new System.EventHandler(this.cmbTriggerAction_SelectedIndexChanged);
+      // 
+      // lblTriggerAction
+      // 
+      this.lblTriggerAction.AutoSize = true;
+      this.lblTriggerAction.Location = new System.Drawing.Point(37, 103);
+      this.lblTriggerAction.Name = "lblTriggerAction";
+      this.lblTriggerAction.Size = new System.Drawing.Size(75, 13);
+      this.lblTriggerAction.TabIndex = 58;
+      this.lblTriggerAction.Text = "Trigger action:";
       // 
       // nudQuietPeriod
       // 
@@ -1203,7 +1208,7 @@ namespace Kinovea.Root
       this.lblAudioTriggerHits.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.lblAudioTriggerHits.Location = new System.Drawing.Point(433, 72);
       this.lblAudioTriggerHits.Name = "lblAudioTriggerHits";
-      this.lblAudioTriggerHits.Size = new System.Drawing.Size(15, 16);
+      this.lblAudioTriggerHits.Size = new System.Drawing.Size(14, 16);
       this.lblAudioTriggerHits.TabIndex = 49;
       this.lblAudioTriggerHits.Text = "0";
       // 

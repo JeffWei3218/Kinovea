@@ -121,7 +121,7 @@ namespace Kinovea.Services
 
         #region Members
         private CapturePathConfiguration capturePathConfiguration = new CapturePathConfiguration();
-        private double displaySynchronizationFramerate = 25.0;
+        private double displaySynchronizationFramerate = 60.0;
         private CaptureRecordingMode recordingMode = CaptureRecordingMode.Camera;
         private bool saveUncompressedVideo;
         private bool verboseStats = false;
@@ -130,8 +130,8 @@ namespace Kinovea.Services
         private DelayCompositeConfiguration delayCompositeConfiguration = new DelayCompositeConfiguration();
         private PhotofinishConfiguration photofinishConfiguration = new PhotofinishConfiguration();
         private CaptureAutomationConfiguration captureAutomationConfiguration = new CaptureAutomationConfiguration();
-        private float highspeedRecordingFramerateThreshold = 150;
-        private float highspeedRecordingFramerateOutput = 30;
+        private float highspeedRecordingFramerateThreshold = 500;
+        private float highspeedRecordingFramerateOutput = 500;
         private float slowspeedRecordingFramerateThreshold = 1;
         private float slowspeedRecordingFramerateOutput = 30;
         private string postRecordCommand;

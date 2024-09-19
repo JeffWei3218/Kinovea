@@ -1,6 +1,6 @@
 #region License
 /*
-Copyright © Joan Charmant 2011.
+Copyright ?Joan Charmant 2011.
 jcharmant@gmail.com 
  
 This file is part of Kinovea.
@@ -369,7 +369,7 @@ namespace Kinovea.Root
       this.label5.Name = "label5";
       this.label5.Size = new System.Drawing.Size(13, 13);
       this.label5.TabIndex = 61;
-      this.label5.Text = "×";
+      this.label5.Text = "?";
       // 
       // tbSearchWidth
       // 
@@ -403,7 +403,7 @@ namespace Kinovea.Root
       this.label4.Name = "label4";
       this.label4.Size = new System.Drawing.Size(13, 13);
       this.label4.TabIndex = 57;
-      this.label4.Text = "×";
+      this.label4.Text = "?";
       // 
       // tbBlockWidth
       // 
