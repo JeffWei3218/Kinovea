@@ -165,11 +165,13 @@ namespace Kinovea.Camera.IDSpeak
         private void PopulateCameraControls()
         {
             int top = lblAuto.Bottom;
-            AddCameraProperty("width", CameraLang.FormConfiguration_Properties_ImageWidth, top);
-            AddCameraProperty("height", CameraLang.FormConfiguration_Properties_ImageHeight, top + 30);
-            AddCameraProperty("framerate", CameraLang.FormConfiguration_Properties_Framerate, top + 60);
-            AddCameraProperty("exposure", CameraLang.FormConfiguration_Properties_ExposureMicro, top + 90);
-            AddCameraProperty("gain", CameraLang.FormConfiguration_Properties_Gain, top + 120);
+            AddCameraProperty("offsetX", CameraLang.FormConfiguration_Properties_OffsetX, top);
+            AddCameraProperty("offsetY", CameraLang.FormConfiguration_Properties_OffsetY, top + 30);
+            AddCameraProperty("width", CameraLang.FormConfiguration_Properties_ImageWidth, top + 60);
+            AddCameraProperty("height", CameraLang.FormConfiguration_Properties_ImageHeight, top + 90);
+            AddCameraProperty("framerate", CameraLang.FormConfiguration_Properties_Framerate, top + 120);
+            AddCameraProperty("exposure", CameraLang.FormConfiguration_Properties_ExposureMicro, top + 150);
+            AddCameraProperty("gain", CameraLang.FormConfiguration_Properties_Gain, top + 180);
         }
 
         private void RemoveCameraControls()
@@ -237,7 +239,7 @@ namespace Kinovea.Camera.IDSpeak
             control.Tag = "Gamma";
             control.ValueChanged += cpvGammaControl_ValueChanged;
             control.Left = 20;
-            control.Top = lblAuto.Bottom + 150;
+            control.Top = lblAuto.Bottom + 210;
             gbProperties.Controls.Add(control);
         }
 
@@ -277,12 +279,21 @@ namespace Kinovea.Camera.IDSpeak
 
             CameraPropertyManager.Write(nodeMap, control.Property);
 
-            if (key == "height" || key == "width")
+            if (key == "offsetX" || key == "offsetY" || key == "height" || key == "width")
             {
                 ReloadProperty("framerate");
                 ReloadProperty("exposure");
+                if(key != "offsetX")
+                    ReloadProperty("offsetX");
+                if (key != "offsetY")
+                    ReloadProperty("offsetY");
+                if (key != "height")
+                    ReloadProperty("height");
+                if (key != "width")
+                    ReloadProperty("width");
             }
-            else if (key == "exposure")
+            
+            if (key == "exposure")
             {
                 ReloadProperty("framerate");
             }
@@ -319,8 +330,16 @@ namespace Kinovea.Camera.IDSpeak
 
             disconnect();
             connect();
-            ReloadProperty("framerate");
-            ReloadProperty("exposure");
+
+            SpecificInfo specific = summary.Specific as SpecificInfo;
+            if (specific == null || specific.NodeMap == null)
+                return;
+
+            nodeMap = specific.NodeMap;
+            cameraProperties = CameraPropertyManager.Read(nodeMap);
+
+            RemoveCameraControls();
+            PopulateCameraControls();
             specificChanged = false;
         }
 

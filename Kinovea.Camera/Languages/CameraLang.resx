@@ -223,6 +223,12 @@
     <value>Export device GenICam XML file</value>
   </data>
   <data name="FormConfiguration_Properties_Gamma" xml:space="preserve">
-    <value>Gamma</value>
+    <value>Gamma:</value>
+  </data>
+  <data name="FormConfiguration_Properties_OffsetX" xml:space="preserve">
+    <value>OffsetX:</value>
+  </data>
+  <data name="FormConfiguration_Properties_OffsetY" xml:space="preserve">
+    <value>OffsetY:</value>
   </data>
 </root>

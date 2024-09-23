@@ -178,7 +178,7 @@ namespace Kinovea.Camera.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gamma.
+        ///   Looks up a localized string similar to Gamma:.
         /// </summary>
         public static string FormConfiguration_Properties_Gamma {
             get {
@@ -210,6 +210,24 @@ namespace Kinovea.Camera.Languages {
         public static string FormConfiguration_Properties_ImageWidth {
             get {
                 return ResourceManager.GetString("FormConfiguration_Properties_ImageWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OffsetX:.
+        /// </summary>
+        public static string FormConfiguration_Properties_OffsetX {
+            get {
+                return ResourceManager.GetString("FormConfiguration_Properties_OffsetX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OffsetY:.
+        /// </summary>
+        public static string FormConfiguration_Properties_OffsetY {
+            get {
+                return ResourceManager.GetString("FormConfiguration_Properties_OffsetY", resourceCulture);
             }
         }
         

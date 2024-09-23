@@ -24,7 +24,7 @@ namespace Kinovea.Camera.IDSpeak
             try
             {
                 // Retrieve camera properties that we support.
-                ReadSize(nodeMap, properties);
+                ReadROI(nodeMap, properties);
                 ReadFramerate(nodeMap, properties);
                 ReadExposure(nodeMap, properties);
                 ReadGain(nodeMap, properties);
@@ -64,6 +64,13 @@ namespace Kinovea.Camera.IDSpeak
                     return ReadExposure(nodeMap, null);
                 else if (key == "gain")
                     return ReadGain(nodeMap, null);
+                else if(key == "offsetX" ||  key == "offsetY" || key == "width" || key == "height")
+                {
+                    Dictionary<string, CameraProperty> properties = new Dictionary<string, CameraProperty>();
+                    ReadROI(nodeMap, properties);
+                    if(properties.ContainsKey(key))
+                        return properties[key];
+                }
             }
             catch (Exception e)
             {
@@ -79,7 +86,7 @@ namespace Kinovea.Camera.IDSpeak
         public static void Write(NodeMap nodeMap, CameraProperty property)
         {
             if (!property.Supported || string.IsNullOrEmpty(property.Identifier))
-                return;
+                return ;
 
             // Only write non critical properties: properties that don't change image size.
 
@@ -96,9 +103,12 @@ namespace Kinovea.Camera.IDSpeak
                     case "gain":
                         WriteGain(nodeMap, property);
                         break;
+                    case "offsetX":
+                    case "offsetY":
                     case "width":
                     case "height":
                         // Do nothing. These properties must be changed from WriteCriticalProperties below.
+                        WriteROI(nodeMap, property);
                         break;
                     default:
                         log.ErrorFormat("IDS uEye property not supported: {0}.", property.Identifier);
@@ -124,11 +134,17 @@ namespace Kinovea.Camera.IDSpeak
             {
                 // We actually need to write all the properties again from here.
                 // Even framerate, gain and exposure which update in real time would be lost if we don't write them outside of freerun.
+                if (properties.ContainsKey("offsetX"))
+                    WriteROI(nodeMap, properties["offsetX"]);
+
+                if (properties.ContainsKey("offsetY"))
+                    WriteROI(nodeMap, properties["offsetY"]);
+
                 if (properties.ContainsKey("width"))
-                    WriteSize(nodeMap, properties["width"]);
+                    WriteROI(nodeMap, properties["width"]);
 
                 if (properties.ContainsKey("height"))
-                    WriteSize(nodeMap, properties["height"]);
+                    WriteROI(nodeMap, properties["height"]);
 
                 if (properties.ContainsKey("framerate"))
                     WriteFramerate(nodeMap, properties["framerate"]);
@@ -145,7 +161,7 @@ namespace Kinovea.Camera.IDSpeak
             }
         }
 
-        private static void ReadSize(NodeMap nodeMap, Dictionary<string, CameraProperty> properties)
+        private static void ReadROI(NodeMap nodeMap, Dictionary<string, CameraProperty> properties)
         {
             // Get the current ROI
             var x = nodeMap.FindNode<IntegerNode>("OffsetX").Value();
@@ -178,6 +194,32 @@ namespace Kinovea.Camera.IDSpeak
             var y_inc = nodeMap.FindNode<IntegerNode>("OffsetY").Increment();
             var w_inc = nodeMap.FindNode<IntegerNode>("Width").Increment();
             var h_inc = nodeMap.FindNode<IntegerNode>("Height").Increment();
+
+            CameraProperty propOffsetX = new CameraProperty();
+            propOffsetX.Identifier = "offsetX";
+            propOffsetX.Supported = true;
+            propOffsetX.ReadOnly = false;
+            propOffsetX.Type = CameraPropertyType.Integer;
+            propOffsetX.Minimum = x_min.ToString(CultureInfo.InvariantCulture);
+            propOffsetX.Maximum = x_max.ToString(CultureInfo.InvariantCulture);
+            propOffsetX.Step = x_inc.ToString(CultureInfo.InvariantCulture);
+            propOffsetX.Representation = CameraPropertyRepresentation.LinearSlider;
+            propOffsetX.CurrentValue = x.ToString(CultureInfo.InvariantCulture);
+
+            properties.Add(propOffsetX.Identifier, propOffsetX);
+
+            CameraProperty propOffsetY = new CameraProperty();
+            propOffsetY.Identifier = "offsetY";
+            propOffsetY.Supported = true;
+            propOffsetY.ReadOnly = false;
+            propOffsetY.Type = CameraPropertyType.Integer;
+            propOffsetY.Minimum = y_min.ToString(CultureInfo.InvariantCulture);
+            propOffsetY.Maximum = y_max.ToString(CultureInfo.InvariantCulture);
+            propOffsetY.Step = y_inc.ToString(CultureInfo.InvariantCulture);
+            propOffsetY.Representation = CameraPropertyRepresentation.LinearSlider;
+            propOffsetY.CurrentValue = y.ToString(CultureInfo.InvariantCulture);
+
+            properties.Add(propOffsetY.Identifier, propOffsetY);
 
             CameraProperty propWidth = new CameraProperty();
             propWidth.Identifier = "width";
@@ -359,6 +401,95 @@ namespace Kinovea.Camera.IDSpeak
             else
             {
                 nodeMap.FindNode<IntegerNode>(identifierName).SetValue(value);
+            }
+        }
+
+        private static void WriteROI(NodeMap nodeMap, CameraProperty property)
+        {
+            if (property.ReadOnly)
+                return;
+            try
+            {
+                // Get the current ROI
+                var x = nodeMap.FindNode<IntegerNode>("OffsetX").Value();
+                var y = nodeMap.FindNode<IntegerNode>("OffsetY").Value();
+                var w = nodeMap.FindNode<IntegerNode>("Width").Value();
+                var h = nodeMap.FindNode<IntegerNode>("Height").Value();
+
+                // Get the minimum ROI
+                var x_min = nodeMap.FindNode<IntegerNode>("OffsetX").Minimum();
+                var y_min = nodeMap.FindNode<IntegerNode>("OffsetY").Minimum();
+                var w_min = nodeMap.FindNode<IntegerNode>("Width").Minimum();
+                var h_min = nodeMap.FindNode<IntegerNode>("Height").Minimum();
+
+                // Set the minimum ROI. This removes any size restrictions due to previous ROI settings
+                nodeMap.FindNode<IntegerNode>("OffsetX").SetValue(x_min);
+                nodeMap.FindNode<IntegerNode>("OffsetY").SetValue(y_min);
+                nodeMap.FindNode<IntegerNode>("Width").SetValue(w_min);
+                nodeMap.FindNode<IntegerNode>("Height").SetValue(h_min);
+
+                // Get the maximum ROI values
+                var x_max = nodeMap.FindNode<IntegerNode>("OffsetX").Maximum();
+                var y_max = nodeMap.FindNode<IntegerNode>("OffsetY").Maximum();
+                var w_max = nodeMap.FindNode<IntegerNode>("Width").Maximum();
+                var h_max = nodeMap.FindNode<IntegerNode>("Height").Maximum();
+
+                // Get the increment
+                var x_inc = nodeMap.FindNode<IntegerNode>("OffsetX").Increment();
+                var y_inc = nodeMap.FindNode<IntegerNode>("OffsetY").Increment();
+                var w_inc = nodeMap.FindNode<IntegerNode>("Width").Increment();
+                var h_inc = nodeMap.FindNode<IntegerNode>("Height").Increment();
+
+                // New ROI values
+                var x_new = x;
+                var y_new = y;
+                var w_new = w;
+                var h_new = h;
+                if(property.Identifier == "offsetX")
+                    x_new = int.Parse(property.CurrentValue, CultureInfo.InvariantCulture);
+                else if (property.Identifier == "offsetY")
+                    y_new = int.Parse(property.CurrentValue, CultureInfo.InvariantCulture);
+                else if (property.Identifier == "width")
+                    w_new = int.Parse(property.CurrentValue, CultureInfo.InvariantCulture);
+                else if (property.Identifier == "height")
+                    h_new = int.Parse(property.CurrentValue, CultureInfo.InvariantCulture);
+                
+
+                // Check that the ROI parameters are within their valid range
+                if ((x_new % x_inc) > 0 || (y_new % y_inc) > 0 || (w_new % w_inc) > 0 || (h_new % h_inc) > 0)
+                {
+                    // adjust offset and size parameters to be divisible by their increment or break
+                    x_new = x;
+                    y_new = y;
+                    w_new = w;
+                    h_new = h;
+                }
+                if ((x_new < x_min) || (y_new < y_min) || (x_new > x_max) || (y_new > y_max))
+                {
+                    // adjust the offsets to be within the valid range or break
+                    x_new = x;
+                    y_new = y;
+                    w_new = w;
+                    h_new = h;
+                }
+                if ((w_new < w_min) || (h_new < h_min) || ((x_new + w_new) > w_max) || ((y_new + h_new) > h_max))
+                {
+                    // adjust the ROI to be within the valid bounds or break
+                    x_new = x;
+                    y_new = y;
+                    w_new = w;
+                    h_new = h;
+                }
+
+                // Set the valid ROI
+                nodeMap.FindNode<IntegerNode>("OffsetX").SetValue(x_new);
+                nodeMap.FindNode<IntegerNode>("OffsetY").SetValue(y_new);
+                nodeMap.FindNode<IntegerNode>("Width").SetValue(w_new);
+                nodeMap.FindNode<IntegerNode>("Height").SetValue(h_new);
+            }
+            catch (Exception e)
+            {
+                log.ErrorFormat("Error while writing IDS camera ROI. {0}.", e.Message);
             }
         }
 

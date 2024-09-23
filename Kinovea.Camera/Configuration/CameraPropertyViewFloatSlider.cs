@@ -29,7 +29,7 @@ namespace Kinovea.Camera
                 Populate();
             else
                 this.Enabled = false;
-
+            
             nud.Visible = useDefaultMapper;
             lblValue.Visible = !useDefaultMapper;
             NudHelper.FixNudScroll(nud);

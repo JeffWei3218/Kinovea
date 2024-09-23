@@ -213,8 +213,7 @@
     <Copy SourceFiles="@(DependenciesX64)" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)\$(TargetFileName)"  "C:\Users\jwei\AppData\Roaming\Kinovea\Plugins\Camera\IDSpeak\$(TargetFileName)"
-copy /y "$(TargetDir)\$(TargetName).pdb" "C:\Users\jwei\AppData\Roaming\Kinovea\Plugins\Camera\IDSpeak\$(TargetName).pdb"
-copy /y "$(TargetDir)\manifest.xml" "C:\Users\jwei\AppData\Roaming\Kinovea\Plugins\Camera\IDSpeak\manifest.xml"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

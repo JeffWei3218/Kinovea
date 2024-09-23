@@ -73,7 +73,7 @@ namespace Kinovea.Camera.IDSpeak
       this.gbProperties.Controls.Add(this.lblColorSpace);
       this.gbProperties.Location = new System.Drawing.Point(12, 94);
       this.gbProperties.Name = "gbProperties";
-      this.gbProperties.Size = new System.Drawing.Size(434, 313);
+      this.gbProperties.Size = new System.Drawing.Size(434, 343);
       this.gbProperties.TabIndex = 84;
       this.gbProperties.TabStop = false;
       // 
@@ -168,7 +168,7 @@ namespace Kinovea.Camera.IDSpeak
       // 
       this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnApply.DialogResult = System.Windows.Forms.DialogResult.OK;
-      this.btnApply.Location = new System.Drawing.Point(349, 413);
+      this.btnApply.Location = new System.Drawing.Point(349, 443);
       this.btnApply.Name = "btnApply";
       this.btnApply.Size = new System.Drawing.Size(99, 24);
       this.btnApply.TabIndex = 204;
@@ -179,7 +179,7 @@ namespace Kinovea.Camera.IDSpeak
       // btnReconnect
       // 
       this.btnReconnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnReconnect.Location = new System.Drawing.Point(244, 413);
+      this.btnReconnect.Location = new System.Drawing.Point(244, 443);
       this.btnReconnect.Name = "btnReconnect";
       this.btnReconnect.Size = new System.Drawing.Size(99, 24);
       this.btnReconnect.TabIndex = 202;
@@ -190,7 +190,7 @@ namespace Kinovea.Camera.IDSpeak
       // btnImport
       // 
       this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnImport.Location = new System.Drawing.Point(12, 413);
+      this.btnImport.Location = new System.Drawing.Point(12, 443);
       this.btnImport.Name = "btnImport";
       this.btnImport.Size = new System.Drawing.Size(138, 24);
       this.btnImport.TabIndex = 200;
@@ -203,7 +203,7 @@ namespace Kinovea.Camera.IDSpeak
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
-      this.ClientSize = new System.Drawing.Size(458, 449);
+      this.ClientSize = new System.Drawing.Size(458, 479);
       this.Controls.Add(this.btnImport);
       this.Controls.Add(this.btnReconnect);
       this.Controls.Add(this.btnApply);
