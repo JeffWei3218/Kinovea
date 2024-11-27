@@ -41,10 +41,12 @@ namespace Kinovea.Camera.IDSpeak
         public int StreamFormat { get; set; }
 
         public float GammaCorrectionValue { get; set; }
-
+        public ImageTransformerConstants ImageTransformerConstants { get; set; }
+        
         public SpecificInfo()
         {
             GammaCorrectionValue = 1.0f;
+            ImageTransformerConstants = ImageTransformerConstants.None;
             StreamFormat = (int)PixelFormatName.Mono8;
             CameraProperties = new Dictionary<string, CameraProperty>();
         }

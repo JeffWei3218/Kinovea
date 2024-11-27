@@ -127,6 +127,7 @@ namespace Kinovea.Camera.IDSpeak
             bool color = !IDSHelper.IsMono(pixelFormat) || bayerColor;
             ImageFormat format = color ? ImageFormat.RGB32 : ImageFormat.Y800;
             imageProvider.GammaCorrectionValue = specific.GammaCorrectionValue;
+            imageProvider.ImageTransformerConstants = specific.ImageTransformerConstants;
             finishline.Prepare((int)width, (int)height, format, resultingFramerate);
             if (finishline.Enabled)
             {

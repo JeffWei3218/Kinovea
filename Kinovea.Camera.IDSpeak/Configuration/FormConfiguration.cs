@@ -67,13 +67,17 @@ namespace Kinovea.Camera.IDSpeak
         {
             get { return gammaCorrectionValue; }
         }
-
+        public ImageTransformerConstants ImageTransformerConstants
+        {
+            get { return imageTransformerConstants; }
+        }
         private CameraSummary summary;
         private bool iconChanged;
         private bool specificChanged;
         private NodeMap nodeMap;
         private IDSEnum selectedStreamFormat;
         private float gammaCorrectionValue;
+        private ImageTransformerConstants imageTransformerConstants;
         private Dictionary<string, CameraProperty> cameraProperties = new Dictionary<string, CameraProperty>();
         private Dictionary<string, AbstractCameraPropertyView> propertiesControls = new Dictionary<string, AbstractCameraPropertyView>();
         private Action disconnect;
@@ -103,7 +107,7 @@ namespace Kinovea.Camera.IDSpeak
             cameraProperties = CameraPropertyManager.Read(nodeMap);
 
             gammaCorrectionValue = specific.GammaCorrectionValue;
-
+            imageTransformerConstants = specific.ImageTransformerConstants;
             Populate();
             this.Text = CameraLang.FormConfiguration_Title;
             btnApply.Text = CameraLang.Generic_Apply;
@@ -116,6 +120,7 @@ namespace Kinovea.Camera.IDSpeak
             {
                 PopulateStreamFormat();
                 PopulateGammaCorrector();
+                PopulateImageTransformer();
                 PopulateCameraControls();
             }
             catch (Exception e)
@@ -253,6 +258,26 @@ namespace Kinovea.Camera.IDSpeak
             specificChanged = true;
         }
 
+        private void PopulateImageTransformer()
+        {
+            m_ctrlRotate180.Checked = imageTransformerConstants == ImageTransformerConstants.Rotate180Deg;
+            m_ctrlRotate180.CheckedChanged += ImageTransformer_CheckedChanged;
+            m_ctrlMirrorLeftRight.Checked = imageTransformerConstants == ImageTransformerConstants.MirrorLeftRight;
+            m_ctrlMirrorLeftRight.CheckedChanged += ImageTransformer_CheckedChanged;
+            m_ctrlMirrorUpDown.Checked = imageTransformerConstants == ImageTransformerConstants.MirrorUpDown;
+            m_ctrlMirrorUpDown.CheckedChanged += ImageTransformer_CheckedChanged;
+        }
+
+        private void ImageTransformer_CheckedChanged(object sender, EventArgs e)
+        {
+            if (m_ctrlRotate180.Checked)
+                imageTransformerConstants = ImageTransformerConstants.Rotate180Deg;
+            if (m_ctrlMirrorLeftRight.Checked)
+                imageTransformerConstants = ImageTransformerConstants.MirrorLeftRight;
+            if (m_ctrlMirrorUpDown.Checked)
+                imageTransformerConstants = ImageTransformerConstants.MirrorUpDown;
+        }
+
         private void ReloadProperty(string key)
         {
             if (!propertiesControls.ContainsKey(key) || !cameraProperties.ContainsKey(key))
@@ -325,6 +350,7 @@ namespace Kinovea.Camera.IDSpeak
             info.StreamFormat = this.SelectedStreamFormat.Value;
             info.CameraProperties = this.CameraProperties;
             info.GammaCorrectionValue = this.GammaCorrectionValue;
+            info.ImageTransformerConstants = this.ImageTransformerConstants;
             summary.UpdateDisplayRectangle(Rectangle.Empty);
             CameraTypeManager.UpdatedCameraSummary(summary);
 

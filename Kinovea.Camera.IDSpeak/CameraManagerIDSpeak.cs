@@ -238,6 +238,7 @@ namespace Kinovea.Camera.IDSpeak
                 {
                     info.StreamFormat = form.SelectedStreamFormat.Value;
                     info.GammaCorrectionValue = form.GammaCorrectionValue;
+                    info.ImageTransformerConstants = form.ImageTransformerConstants;
                     info.CameraProperties = form.CameraProperties;
 
                     summary.UpdateDisplayRectangle(Rectangle.Empty);
@@ -334,6 +335,11 @@ namespace Kinovea.Camera.IDSpeak
                 if (xmlGammaCorrectionValue != null)
                     gammaCorrectorValue = float.Parse(xmlGammaCorrectionValue.InnerText);
 
+                ImageTransformerConstants imageTransformerValue = ImageTransformerConstants.None;
+                XmlNode xmlImageTransformerValue = doc.SelectSingleNode("/IDS/ImageTransformerValue");
+                if (xmlImageTransformerValue != null)
+                    imageTransformerValue = (ImageTransformerConstants)Enum.Parse(typeof(ImageTransformerConstants), xmlImageTransformerValue.InnerText);
+
                 Dictionary<string, CameraProperty> cameraProperties = new Dictionary<string, CameraProperty>();
 
                 XmlNodeList props = doc.SelectNodes("/IDS/CameraProperties/CameraProperty");
@@ -364,6 +370,7 @@ namespace Kinovea.Camera.IDSpeak
 
                 info.StreamFormat = int.Parse(streamFormat);
                 info.GammaCorrectionValue = gammaCorrectorValue;
+                info.ImageTransformerConstants = imageTransformerValue;
                 info.CameraProperties = cameraProperties;
             }
             catch (Exception e)
@@ -389,6 +396,10 @@ namespace Kinovea.Camera.IDSpeak
             XmlElement xmlGammaCorrectionValue = doc.CreateElement("GammaCorrectionValue");
             xmlGammaCorrectionValue.InnerText = info.GammaCorrectionValue.ToString();
             xmlRoot.AppendChild(xmlGammaCorrectionValue);
+
+            XmlElement xmlImageTransformerValue = doc.CreateElement("ImageTransformerValue");
+            xmlImageTransformerValue.InnerText = info.ImageTransformerConstants.ToString();
+            xmlRoot.AppendChild(xmlImageTransformerValue);
 
             XmlElement xmlCameraProperties = doc.CreateElement("CameraProperties");
 

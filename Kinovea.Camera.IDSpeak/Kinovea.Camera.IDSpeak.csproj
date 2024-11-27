@@ -154,6 +154,11 @@
     <Compile Include="IDSpeak.NetSupportLibrary\DeviceEnumerator.cs" />
     <Compile Include="IDSpeak.NetSupportLibrary\ImageProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SnapshotRetriever.cs" />
     <Compile Include="SpecificInfo.cs" />
   </ItemGroup>
@@ -175,6 +180,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon\icon-mirror-horizontal.png" />
+    <Content Include="icon\icon-mirror-vertical.png" />
+    <Content Include="icon\icon-rotate-180.png" />
     <Content Include="manifest.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -184,7 +192,12 @@
     <EmbeddedResource Include="Configuration\FormConfiguration.resx">
       <DependentUpon>FormConfiguration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="FixAL1703Warning" BeforeTargets="GenerateSatelliteAssemblies" Condition="'$(PlatformTarget)' == 'x64'">
     <Message Text="Adjusting SDK tools directory to use x64 version of AL.EXE" />

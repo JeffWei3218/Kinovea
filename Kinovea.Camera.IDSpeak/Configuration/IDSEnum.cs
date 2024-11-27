@@ -21,4 +21,12 @@ namespace Kinovea.Camera.IDSpeak
             return DisplayName;
         }
     }
+
+    public enum ImageTransformerConstants
+    {
+        None = 0,
+        Rotate180Deg = 1,
+        MirrorUpDown = 2,
+        MirrorLeftRight = 3
+    }
 }

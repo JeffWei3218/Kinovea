@@ -49,8 +49,10 @@ namespace Kinovea.Camera.IDSpeak
         protected DataStream m_dataStream;
         protected peak.ipl.ImageConverter m_imageConverter;
         protected peak.ipl.GammaCorrector m_gammaCorrector;
+        protected peak.ipl.ImageTransformer m_imageTransformer;
         protected NodeMap m_nodeMap;
         protected float m_gammaCorrectionValue = 1.0f;     /* The gamma correction value. */
+        protected ImageTransformerConstants m_imageTransformerConstants = ImageTransformerConstants.None;     /* The image transformer value. */
         protected uint m_numberOfBuffersUsed = 5;          /* Number of m_buffers used in grab. */
         protected bool m_grabThreadRun = false;            /* Indicates that the grab thread is active.*/
         protected bool m_open = false;                     /* Indicates that the device is open and ready to grab.*/
@@ -101,6 +103,11 @@ namespace Kinovea.Camera.IDSpeak
         {
             get { return m_gammaCorrectionValue; }
             set { m_gammaCorrectionValue = value; }
+        }
+        public ImageTransformerConstants ImageTransformerConstants
+        {
+            get { return m_imageTransformerConstants; }
+            set { m_imageTransformerConstants = value; }
         }
         /* Open using index. Before ImageProvider can be opened using the index, Pylon.EnumerateDevices() needs to be called. */
         public void Open(uint index)
@@ -468,6 +475,8 @@ namespace Kinovea.Camera.IDSpeak
 
             m_gammaCorrector = new GammaCorrector();
             m_gammaCorrector.SetGammaCorrectionValue(m_gammaCorrectionValue);
+            m_imageTransformer = new peak.ipl.ImageTransformer();
+
             // Start acquisition
             m_dataStream.StartAcquisition();
             m_nodeMap.FindNode<CommandNode>("AcquisitionStart").Execute();
@@ -581,6 +590,15 @@ namespace Kinovea.Camera.IDSpeak
                 float gammaCorrectionValue = m_gammaCorrector.GammaCorrectionValue();
                 iplImg = m_gammaCorrector.Process(iplImg);
             }
+            if (m_imageTransformer != null && m_imageTransformerConstants != ImageTransformerConstants.None)
+            {
+                if(m_imageTransformerConstants == ImageTransformerConstants.Rotate180Deg)
+                    iplImg = m_imageTransformer.Rotate(iplImg, ImageTransformer.RotationAngle.Degree180);
+                else if (m_imageTransformerConstants == ImageTransformerConstants.MirrorLeftRight)
+                    iplImg = m_imageTransformer.MirrorLeftRight(iplImg);
+                else if (m_imageTransformerConstants == ImageTransformerConstants.MirrorUpDown)
+                    iplImg = m_imageTransformer.MirrorUpDown(iplImg);
+            }
             var byteCount = iplImg.ByteCount();
             byte[] bytes = new byte[byteCount];
             Marshal.Copy(iplImg.Data(), bytes, 0, (int)byteCount);
@@ -616,6 +634,11 @@ namespace Kinovea.Camera.IDSpeak
                 m_gammaCorrector.Dispose();
                 /* Set the handle invalid. The next grab cycle may not need a converter. */
                 m_gammaCorrector = null;
+            }
+            if(m_imageTransformer != null)
+            {
+                m_imageTransformer.Dispose();
+                m_imageTransformer = null;
             }
             /* Clear the grab buffers to assure proper operation (because they may
              still be filled if the last grab has thrown an exception). */

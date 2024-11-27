@@ -59,8 +59,13 @@ namespace Kinovea.Camera.IDSpeak
       this.btnApply = new System.Windows.Forms.Button();
       this.btnReconnect = new System.Windows.Forms.Button();
       this.btnImport = new System.Windows.Forms.Button();
+      this.m_ctrlImageTransformations = new System.Windows.Forms.GroupBox();
+      this.m_ctrlRotate180 = new System.Windows.Forms.RadioButton();
+      this.m_ctrlMirrorLeftRight = new System.Windows.Forms.RadioButton();
+      this.m_ctrlMirrorUpDown = new System.Windows.Forms.RadioButton();
       this.gbProperties.SuspendLayout();
       this.groupBox2.SuspendLayout();
+      this.m_ctrlImageTransformations.SuspendLayout();
       this.SuspendLayout();
       // 
       // gbProperties
@@ -168,7 +173,7 @@ namespace Kinovea.Camera.IDSpeak
       // 
       this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnApply.DialogResult = System.Windows.Forms.DialogResult.OK;
-      this.btnApply.Location = new System.Drawing.Point(349, 443);
+      this.btnApply.Location = new System.Drawing.Point(349, 508);
       this.btnApply.Name = "btnApply";
       this.btnApply.Size = new System.Drawing.Size(99, 24);
       this.btnApply.TabIndex = 204;
@@ -179,7 +184,7 @@ namespace Kinovea.Camera.IDSpeak
       // btnReconnect
       // 
       this.btnReconnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnReconnect.Location = new System.Drawing.Point(244, 443);
+      this.btnReconnect.Location = new System.Drawing.Point(244, 508);
       this.btnReconnect.Name = "btnReconnect";
       this.btnReconnect.Size = new System.Drawing.Size(99, 24);
       this.btnReconnect.TabIndex = 202;
@@ -190,7 +195,7 @@ namespace Kinovea.Camera.IDSpeak
       // btnImport
       // 
       this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnImport.Location = new System.Drawing.Point(12, 443);
+      this.btnImport.Location = new System.Drawing.Point(12, 508);
       this.btnImport.Name = "btnImport";
       this.btnImport.Size = new System.Drawing.Size(138, 24);
       this.btnImport.TabIndex = 200;
@@ -198,12 +203,72 @@ namespace Kinovea.Camera.IDSpeak
       this.btnImport.UseVisualStyleBackColor = true;
       this.btnImport.Click += new System.EventHandler(this.BtnImport_Click);
       // 
+      // m_ctrlImageTransformations
+      // 
+      this.m_ctrlImageTransformations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.m_ctrlImageTransformations.Controls.Add(this.m_ctrlMirrorUpDown);
+      this.m_ctrlImageTransformations.Controls.Add(this.m_ctrlMirrorLeftRight);
+      this.m_ctrlImageTransformations.Controls.Add(this.m_ctrlRotate180);
+      this.m_ctrlImageTransformations.Location = new System.Drawing.Point(13, 444);
+      this.m_ctrlImageTransformations.Name = "m_ctrlImageTransformations";
+      this.m_ctrlImageTransformations.Size = new System.Drawing.Size(433, 59);
+      this.m_ctrlImageTransformations.TabIndex = 205;
+      this.m_ctrlImageTransformations.TabStop = false;
+      this.m_ctrlImageTransformations.Text = "Image transformations";
+      // 
+      // m_ctrlRotate180
+      // 
+      this.m_ctrlRotate180.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+      this.m_ctrlRotate180.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+      this.m_ctrlRotate180.Image = global::Kinovea.Camera.IDSpeak.Properties.Resources.icon_rotate_180;
+      this.m_ctrlRotate180.Location = new System.Drawing.Point(6, 23);
+      this.m_ctrlRotate180.Name = "m_ctrlRotate180";
+      this.m_ctrlRotate180.Size = new System.Drawing.Size(117, 30);
+      this.m_ctrlRotate180.TabIndex = 0;
+      this.m_ctrlRotate180.TabStop = true;
+      this.m_ctrlRotate180.Text = "Rotate 180";
+      this.m_ctrlRotate180.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.m_ctrlRotate180.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.m_ctrlRotate180.UseVisualStyleBackColor = true;
+      // 
+      // m_ctrlMirrorLeftRight
+      // 
+      this.m_ctrlMirrorLeftRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.m_ctrlMirrorLeftRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+      this.m_ctrlMirrorLeftRight.Image = global::Kinovea.Camera.IDSpeak.Properties.Resources.icon_mirror_vertical;
+      this.m_ctrlMirrorLeftRight.Location = new System.Drawing.Point(129, 23);
+      this.m_ctrlMirrorLeftRight.Name = "m_ctrlMirrorLeftRight";
+      this.m_ctrlMirrorLeftRight.Size = new System.Drawing.Size(133, 30);
+      this.m_ctrlMirrorLeftRight.TabIndex = 1;
+      this.m_ctrlMirrorLeftRight.TabStop = true;
+      this.m_ctrlMirrorLeftRight.Text = "Mirror left/right";
+      this.m_ctrlMirrorLeftRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.m_ctrlMirrorLeftRight.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.m_ctrlMirrorLeftRight.UseVisualStyleBackColor = true;
+      // 
+      // m_ctrlMirrorUpDown
+      // 
+      this.m_ctrlMirrorUpDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+      this.m_ctrlMirrorUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+      this.m_ctrlMirrorUpDown.Image = global::Kinovea.Camera.IDSpeak.Properties.Resources.icon_mirror_horizontal;
+      this.m_ctrlMirrorUpDown.Location = new System.Drawing.Point(268, 23);
+      this.m_ctrlMirrorUpDown.Name = "m_ctrlMirrorUpDown";
+      this.m_ctrlMirrorUpDown.Size = new System.Drawing.Size(159, 30);
+      this.m_ctrlMirrorUpDown.TabIndex = 2;
+      this.m_ctrlMirrorUpDown.TabStop = true;
+      this.m_ctrlMirrorUpDown.Text = "Mirror up/down";
+      this.m_ctrlMirrorUpDown.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.m_ctrlMirrorUpDown.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.m_ctrlMirrorUpDown.UseVisualStyleBackColor = true;
+      // 
       // FormConfiguration
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.White;
-      this.ClientSize = new System.Drawing.Size(458, 479);
+      this.ClientSize = new System.Drawing.Size(458, 544);
+      this.Controls.Add(this.m_ctrlImageTransformations);
       this.Controls.Add(this.btnImport);
       this.Controls.Add(this.btnReconnect);
       this.Controls.Add(this.btnApply);
@@ -218,6 +283,7 @@ namespace Kinovea.Camera.IDSpeak
       this.gbProperties.ResumeLayout(false);
       this.groupBox2.ResumeLayout(false);
       this.groupBox2.PerformLayout();
+      this.m_ctrlImageTransformations.ResumeLayout(false);
       this.ResumeLayout(false);
 
         }
@@ -232,5 +298,9 @@ namespace Kinovea.Camera.IDSpeak
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.Button btnReconnect;
         private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.GroupBox m_ctrlImageTransformations;
+        private System.Windows.Forms.RadioButton m_ctrlRotate180;
+        private System.Windows.Forms.RadioButton m_ctrlMirrorUpDown;
+        private System.Windows.Forms.RadioButton m_ctrlMirrorLeftRight;
     }
 }
